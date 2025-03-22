@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug NestJS",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/.bin/nest",
+      "args": ["start", "--debug", "--watch"],
+      "cwd": "${workspaceFolder}",
+      "sourceMaps": true,
+      "protocol": "inspector",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Attach to Process",
+      "type": "node",
+      "request": "attach",
+      "processId": "${command:PickProcess}"
+    }
+  ]
+}
