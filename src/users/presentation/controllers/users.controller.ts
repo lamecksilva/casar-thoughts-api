@@ -1,5 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { UsersService } from './users.service';
+import { UsersService } from 'src/users/users.service';
 
 @Controller('users')
 export class UsersController {
@@ -7,6 +7,6 @@ export class UsersController {
 
   @Get(':username')
   findOne(@Param('username') username: string) {
-    return this.usersService.findByUsername(username);
+    return this.usersService.getUserProfile(username);
   }
 }

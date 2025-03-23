@@ -1,4 +1,8 @@
 import {
+  IUser,
+  UserEntityTypeORM,
+} from 'src/users/domain/entities/user.entity';
+import {
   Column,
   CreateDateColumn,
   Entity,
@@ -6,7 +10,6 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { IUser, UserEntityTypeORM } from './user.entity';
 
 export interface IPost {
   id: string;

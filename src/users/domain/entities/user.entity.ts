@@ -1,4 +1,8 @@
 import {
+  IPost,
+  PostEntityTypeORM,
+} from 'src/posts/domain/entities/post.entity';
+import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -7,7 +11,6 @@ import {
   JoinTable,
   OneToMany,
 } from 'typeorm';
-import { IPost, PostEntityTypeORM } from './post.entity';
 
 export interface IUser {
   id: string;

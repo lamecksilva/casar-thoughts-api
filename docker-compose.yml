@@ -19,12 +19,12 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: 'postgres://casaradm:69t;8:&s<Lp3@postgres:5432/casar-thoughts'
+      DATABASE_URL: 'postgres://casaradm:69t;8:&s<Lp3@postgres:5432/casar_thoughts'
       DB_HOST: postgres
       DB_PORT: 5432
       DB_USER: casaradm
       DB_PASSWORD: 69t;8:&s<Lp3
-      DB_NAME: casar-thoughts
+      DB_NAME: casar_thoughts
       NODE_ENV: production
     ports:
       - '3000:3000'

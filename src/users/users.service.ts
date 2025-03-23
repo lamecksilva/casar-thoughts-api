@@ -1,14 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { GetUserProfileUseCase } from './application/use-cases/get-user-profile.use-case';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    Logger.log(createUserDto);
-    return 'This action adds a new user';
-  }
+  constructor(private getProfileUseCase: GetUserProfileUseCase) {}
 
-  findByUsername(username: string) {
-    return `This action returns the user by username @${username}`;
+  async getUserProfile(username: string) {
+    return await this.getProfileUseCase.execute(username);
   }
 }
