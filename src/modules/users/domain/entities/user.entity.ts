@@ -1,7 +1,7 @@
 import {
   IPost,
   PostEntityTypeORM,
-} from 'src/posts/domain/entities/post.entity';
+} from 'src/modules/posts/domain/entities/post.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -23,7 +23,9 @@ export interface IUser {
 }
 
 // Poderia ser outro arquivo somente para essa entidade do TypeORM, mas resolvi deixar aqui mesmo.
-@Entity()
+@Entity({
+  name: 'users',
+})
 export class UserEntityTypeORM implements IUser {
   @PrimaryGeneratedColumn('uuid')
   id: string;

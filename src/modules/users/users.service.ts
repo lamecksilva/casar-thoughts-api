@@ -6,6 +6,7 @@ export class UsersService {
   constructor(private getProfileUseCase: GetUserProfileUseCase) {}
 
   async getUserProfile(username: string) {
+    Logger.log('Get user profile');
     return await this.getProfileUseCase.execute(username);
   }
 }

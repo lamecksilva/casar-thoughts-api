@@ -1,11 +1,7 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { UserEntityTypeORM } from './users/domain/entities/user.entity';
-import { PostEntityTypeORM } from './posts/domain/entities/post.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
@@ -17,13 +13,12 @@ import { PostEntityTypeORM } from './posts/domain/entities/post.entity';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [UserEntityTypeORM, PostEntityTypeORM],
-      synchronize: process.env.NODE_ENV === 'development',
+      migrations: [__dirname + 'src/infrastructure/database/migrations/*.ts'],
+      entities: [__dirname + 'src/modules/**/domain/**/*.entity{.ts,.js}'],
     }),
     UsersModule,
-    // PostsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

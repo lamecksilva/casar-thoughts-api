@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsUUID, IsString, IsDateString } from 'class-validator';
-import { IPost } from 'src/posts/domain/entities/post.entity';
-import { IUser } from 'src/users/domain/entities/user.entity';
+import { IPost } from 'src/modules/posts/domain/entities/post.entity';
+import { IUser } from '../../domain/entities/user.entity';
 
 export class UserDto implements IUser {
   @ApiProperty({ required: true })

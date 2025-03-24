@@ -1,7 +1,7 @@
 import {
   IUser,
   UserEntityTypeORM,
-} from 'src/users/domain/entities/user.entity';
+} from 'src/modules/users/domain/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
@@ -21,7 +21,9 @@ export interface IPost {
   createdAt: Date;
 }
 
-@Entity()
+@Entity({
+  name: 'posts',
+})
 export class PostEntityTypeORM implements IPost {
   @PrimaryGeneratedColumn('uuid')
   id: string;

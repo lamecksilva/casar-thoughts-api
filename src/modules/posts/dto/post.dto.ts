@@ -1,4 +1,4 @@
-import { UserDto } from 'src/users/application/dto/user.dto';
+import { UserDto } from 'src/modules/users/application/dto/user.dto';
 import { IPost } from '../domain/entities/post.entity';
 
 export class UserPostDto {
