@@ -15,7 +15,10 @@ async function seedDatabase() {
   const users: UserEntityTypeORM[] = [];
   for (let i = 0; i < 10; i++) {
     const user = userRepository.create({
-      username: faker.internet.username().slice(0, 14),
+      username: faker.internet
+        .username()
+        .replace(/[^a-zA-Z0-9]/g, '')
+        .slice(0, 14),
       displayName: faker.person.fullName(),
       following: [],
       followers: [],

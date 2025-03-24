@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './modules/users/users.module';
+import { UserEntityTypeORM } from './modules/users/domain/entities/user.entity';
+import { PostEntityTypeORM } from './modules/posts/domain/entities/post.entity';
 
 @Module({
   imports: [
@@ -14,7 +16,8 @@ import { UsersModule } from './modules/users/users.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       migrations: [__dirname + 'src/infrastructure/database/migrations/*.ts'],
-      entities: [__dirname + 'src/modules/**/domain/**/*.entity{.ts,.js}'],
+      entities: [UserEntityTypeORM, PostEntityTypeORM],
+      autoLoadEntities: true,
     }),
     UsersModule,
   ],

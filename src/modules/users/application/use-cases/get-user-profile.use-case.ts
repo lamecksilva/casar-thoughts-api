@@ -19,9 +19,9 @@ export class GetUserProfileUseCase {
     return {
       username: user.username,
       memberSince: user.createdAt.toLocaleString('pt-BR'),
-      followers: user.followers.length,
-      following: user.following.length,
-      posts: user.posts.length,
+      followers: user.followers?.length,
+      following: user.following?.length,
+      posts: user.posts?.length,
       isFollowing: this.checkIsFollowing(user.followers, loggedUsername),
     };
   }

@@ -12,6 +12,9 @@ export class UsersTypeORMRepository implements UsersRepository {
   ) {}
 
   async findByUsername(username: string): Promise<IUser | null> {
-    return this.userRepository.findOneBy({ username });
+    return this.userRepository.findOne({
+      where: { username },
+      relations: ['following', 'followers'],
+    });
   }
 }

@@ -34,7 +34,7 @@ export class PostEntityTypeORM implements IPost {
   @Column({ type: 'uuid' })
   userId: string;
 
-  @ManyToOne(() => UserEntityTypeORM, (user) => user.posts, { eager: true })
+  @ManyToOne(() => UserEntityTypeORM, (user) => user.posts, { lazy: true })
   @JoinColumn({ name: 'userId' })
   user: UserEntityTypeORM;
 
@@ -43,7 +43,7 @@ export class PostEntityTypeORM implements IPost {
 
   @ManyToOne(() => PostEntityTypeORM, {
     nullable: true,
-    eager: true,
+    lazy: true,
   })
   @JoinColumn({ name: 'originalPostId' })
   originalPost?: PostEntityTypeORM;

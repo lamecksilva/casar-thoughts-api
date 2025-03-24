@@ -10,6 +10,7 @@ import {
   ManyToMany,
   JoinTable,
   OneToMany,
+  Check,
 } from 'typeorm';
 
 export interface IUser {
@@ -23,6 +24,7 @@ export interface IUser {
 }
 
 // Poderia ser outro arquivo somente para essa entidade do TypeORM, mas resolvi deixar aqui mesmo.
+@Check(`username ~ '^[a-zA-Z0-9]+$'`)
 @Entity({
   name: 'users',
 })
@@ -39,7 +41,7 @@ export class UserEntityTypeORM implements IUser {
   @Column({ type: 'varchar', length: 30 })
   displayName: string;
 
-  @ManyToMany(() => UserEntityTypeORM, (user) => user.following)
+  @ManyToMany(() => UserEntityTypeORM, (user) => user.followers)
   @JoinTable({
     name: 'followers',
     joinColumn: { name: 'followerId', referencedColumnName: 'id' },
@@ -47,7 +49,7 @@ export class UserEntityTypeORM implements IUser {
   })
   following: UserEntityTypeORM[];
 
-  @ManyToMany(() => UserEntityTypeORM, (user) => user.followers)
+  @ManyToMany(() => UserEntityTypeORM, (user) => user.following)
   followers: UserEntityTypeORM[];
 
   @OneToMany(() => PostEntityTypeORM, (post) => post.user)
