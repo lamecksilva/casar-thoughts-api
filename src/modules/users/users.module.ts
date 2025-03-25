@@ -8,6 +8,7 @@ import { UsersTypeORMRepository } from './domain/repositories/users_typeorm.repo
 import { UsersController } from './presentation/controllers/users.controller';
 import { UsersService } from './users.service';
 import { FollowUserUseCase } from '../followers/application/use-case/follow-user.use-case';
+import { UnfollowUserUseCase } from '../followers/application/use-case/unfollow-user.use-case';
 
 @Module({
   controllers: [UsersController],
@@ -21,6 +22,7 @@ import { FollowUserUseCase } from '../followers/application/use-case/follow-user
     UsersService,
     GetUserProfileUseCase,
     FollowUserUseCase,
+    UnfollowUserUseCase,
   ],
   exports: [UsersRepository],
 })

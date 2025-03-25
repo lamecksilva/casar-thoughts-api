@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { FollowersRepository } from '../../domain/repositories/followers.repository';
 import { SuccessFollowResponseDto } from 'src/modules/users/application/dto/follow-user.dto';
 
@@ -11,11 +11,11 @@ export class FollowUserUseCase {
     followingId: string,
   ): Promise<SuccessFollowResponseDto> {
     if (followerId === followingId) {
-      throw new Error("You can't follow yourself");
+      throw new BadRequestException("You can't follow yourself");
     }
 
     if (await this.followersRepository.isFollowing(followerId, followingId)) {
-      throw new Error('You is already following this user');
+      throw new BadRequestException('You is already following this user');
     }
 
     await this.followersRepository.followUser(followerId, followingId);

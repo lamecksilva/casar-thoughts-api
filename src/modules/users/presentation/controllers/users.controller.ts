@@ -41,4 +41,22 @@ export class UsersController {
       followingId,
     });
   }
+
+  @Post(':id/unfollow')
+  @ApiOperation({ summary: 'Unfollow user' })
+  @ApiParam({
+    name: 'id',
+    example: 'f30c9331-d8b0-4052-be48-df73b4002fdc',
+    description: 'ID of user to be unfollowed',
+  })
+  @ApiResponse({ status: 200, type: SuccessFollowResponseDto })
+  async unfollowUser(
+    @Param('id') followingId: string,
+    @Query() query: FollowUserQueryDto,
+  ) {
+    return await this.usersService.unfollowUser({
+      followerId: query.authenticatedUserId,
+      followingId,
+    });
+  }
 }
