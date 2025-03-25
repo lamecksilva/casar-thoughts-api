@@ -21,6 +21,8 @@ export class PostsTypeORMRepository implements PostsRepository {
   ): Promise<IPostsResponse> {
     const [posts, total] = await this.postsRepository
       .createQueryBuilder('post')
+      .leftJoinAndSelect('post.user', 'user')
+      .select(['post', 'user.id', 'user.username', 'user.displayName'])
       .where('post.userId = :userId', { userId })
       .orderBy('post.createdAt', 'DESC')
       .skip(((pagination.page ?? 1) - 1) * (pagination.limit ?? 10))

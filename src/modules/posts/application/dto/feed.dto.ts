@@ -12,7 +12,7 @@ export class GetProfileFeedPaginationDto {
   limit: number;
 }
 
-export class FeedDto {
+export class FeedResponseDto {
   @ApiProperty({ required: true, example: 10 })
   total: number;
 

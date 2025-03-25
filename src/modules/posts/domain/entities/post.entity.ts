@@ -34,7 +34,7 @@ export class PostEntityTypeORM implements IPost {
   @Column({ type: 'uuid' })
   userId: string;
 
-  @ManyToOne(() => UserEntityTypeORM, (user) => user.posts, { lazy: true })
+  @ManyToOne(() => UserEntityTypeORM, (user) => user.posts, { eager: true })
   @JoinColumn({ name: 'userId' })
   user: UserEntityTypeORM;
 
