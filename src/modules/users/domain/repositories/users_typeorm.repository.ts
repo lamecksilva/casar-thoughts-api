@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { IUser, UserEntityTypeORM } from '../entities/user.entity';
-import { IFindByUsernameOption, UsersRepository } from './users.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { IUser, UserEntityTypeORM } from '../entities/user.entity';
+import { IFindByUsernameOption, UsersRepository } from './users.repository';
 
 @Injectable()
 export class UsersTypeORMRepository implements UsersRepository {
@@ -11,15 +11,27 @@ export class UsersTypeORMRepository implements UsersRepository {
     private readonly userRepository: Repository<UserEntityTypeORM>,
   ) {}
 
+  async findById(
+    userId: string,
+    options?: IFindByUsernameOption,
+  ): Promise<IUser> {
+    return options?.withRelations
+      ? await this.userRepository.findOne({
+          where: { id: userId },
+          relations: ['following', 'followers', 'posts'],
+        })
+      : await this.userRepository.findOneBy({ id: userId });
+  }
+
   async findByUsername(
     username: string,
     options: IFindByUsernameOption,
   ): Promise<IUser | null> {
     return options?.withRelations
-      ? this.userRepository.findOne({
+      ? await this.userRepository.findOne({
           where: { username },
-          relations: ['following', 'followers'],
+          relations: ['following', 'followers', 'posts'],
         })
-      : this.userRepository.findOneBy({ username });
+      : await this.userRepository.findOneBy({ username });
   }
 }

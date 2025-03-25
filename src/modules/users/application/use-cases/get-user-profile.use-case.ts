@@ -7,10 +7,7 @@ import { ProfileDto } from '../dto/profile.dto';
 export class GetUserProfileUseCase {
   constructor(private readonly usersRepository: UsersRepository) {}
 
-  async execute(
-    username: string,
-    loggedUsername?: string,
-  ): Promise<ProfileDto> {
+  async execute(username: string, loggedId?: string): Promise<ProfileDto> {
     const user = await this.usersRepository.findByUsername(username, {
       withRelations: true,
     });
@@ -18,19 +15,24 @@ export class GetUserProfileUseCase {
       throw new NotFoundException(`User ${username} not found`);
     }
 
+    return this.formatResponse(user, loggedId);
+  }
+
+  isFollowing(followers: IUser[], loggedId?: string): boolean {
+    if (!loggedId) return false;
+
+    return followers.some((user: IUser) => user.id === loggedId);
+  }
+
+  formatResponse(user: IUser, loggedId: string): ProfileDto {
     return {
+      id: user.id,
       username: user.username,
       memberSince: user.createdAt.toLocaleString('pt-BR'),
       followers: user.followers?.length,
       following: user.following?.length,
       posts: user.posts?.length,
-      isFollowing: this.checkIsFollowing(user.followers, loggedUsername),
+      isFollowing: this.isFollowing(user.followers, loggedId),
     };
-  }
-
-  checkIsFollowing(followers: IUser[], username?: string): boolean {
-    if (!username) return false;
-
-    return followers.some((user: IUser) => user.username === username);
   }
 }

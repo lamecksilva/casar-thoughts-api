@@ -8,4 +8,9 @@ export abstract class UsersRepository {
     username: string,
     options?: IFindByUsernameOption,
   ): Promise<IUser>;
+
+  abstract findById(
+    userId: string,
+    options?: IFindByUsernameOption,
+  ): Promise<IUser>;
 }

@@ -5,6 +5,7 @@ import { UsersModule } from './modules/users/users.module';
 import { UserEntityTypeORM } from './modules/users/domain/entities/user.entity';
 import { PostEntityTypeORM } from './modules/posts/domain/entities/post.entity';
 import { PostsModule } from './modules/posts/posts.module';
+import { FollowersModule } from './modules/followers/followers.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { PostsModule } from './modules/posts/posts.module';
     }),
     UsersModule,
     PostsModule,
+    FollowersModule,
   ],
   controllers: [],
   providers: [],
