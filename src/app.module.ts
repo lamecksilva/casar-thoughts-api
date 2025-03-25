@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './modules/users/users.module';
 import { UserEntityTypeORM } from './modules/users/domain/entities/user.entity';
 import { PostEntityTypeORM } from './modules/posts/domain/entities/post.entity';
+import { PostsModule } from './modules/posts/posts.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { PostEntityTypeORM } from './modules/posts/domain/entities/post.entity';
       autoLoadEntities: true,
     }),
     UsersModule,
+    PostsModule,
   ],
   controllers: [],
   providers: [],

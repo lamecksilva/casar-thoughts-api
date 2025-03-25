@@ -1,14 +1,18 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { CreatePostDto } from './dto/create-post.dto';
+import { Injectable } from '@nestjs/common';
+import {
+  FeedDto,
+  GetProfileFeedPaginationDto,
+} from './application/dto/feed.dto';
+import { GetProfileFeedUseCase } from './application/use-cases/get-profile-feed.use-case';
 
 @Injectable()
 export class PostsService {
-  create(createPostDto: CreatePostDto) {
-    Logger.log(createPostDto);
-    return 'This action adds a new post';
-  }
+  constructor(private getProfileFeedUseCase: GetProfileFeedUseCase) {}
 
-  findAll() {
-    return `This action returns all posts`;
+  async getProfileFeed(
+    username: string,
+    pagination: GetProfileFeedPaginationDto,
+  ): Promise<FeedDto> {
+    return await this.getProfileFeedUseCase.execute(username, pagination);
   }
 }

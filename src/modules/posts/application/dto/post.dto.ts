@@ -1,5 +1,5 @@
 import { UserDto } from 'src/modules/users/application/dto/user.dto';
-import { IPost } from '../domain/entities/post.entity';
+import { IPost } from '../../domain/entities/post.entity';
 
 export class UserPostDto {
   name: string;

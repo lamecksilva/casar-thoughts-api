@@ -19,6 +19,6 @@ import { UsersRepository } from './domain/repositories/users.repository';
     GetUserProfileUseCase,
     UsersService,
   ],
-  exports: [UsersTypeORMRepository],
+  exports: [UsersRepository],
 })
 export class UsersModule {}

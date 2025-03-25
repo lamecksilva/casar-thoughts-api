@@ -11,7 +11,9 @@ export class GetUserProfileUseCase {
     username: string,
     loggedUsername?: string,
   ): Promise<ProfileDto> {
-    const user = await this.usersRepository.findByUsername(username);
+    const user = await this.usersRepository.findByUsername(username, {
+      withRelations: true,
+    });
     if (!user) {
       throw new NotFoundException(`User ${username} not found`);
     }
