@@ -6,11 +6,11 @@ Repositório do projeto de teste técnico da Casar.com.
 
 Para executar esse projeto, siga os passos:
 
-`git clone git@github.com:lamecksilva/casar-thoughts-api.git`
-
-`cd casar-thoughts-api`
-
-`docker-compose up`
+```bash
+git clone git@github.com:lamecksilva/casar-thoughts-api.git`
+cd casar-thoughts-api
+docker-compose up
+```
 
 As imagens serão baixadas e a API será acessível na porta 3000.
 
