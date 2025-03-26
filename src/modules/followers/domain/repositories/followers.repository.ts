@@ -5,4 +5,5 @@ export abstract class FollowersRepository {
   ): Promise<boolean>;
   abstract followUser(followerId: string, followingId: string): Promise<void>;
   abstract unfollowUser(followerId: string, followingId: string): Promise<void>;
+  abstract findFollowersIds(userId: string): Promise<string[]>;
 }

@@ -31,4 +31,34 @@ export class PostsTypeORMRepository implements PostsRepository {
 
     return { total, posts };
   }
+
+  async findAll(pagination: IPagination): Promise<IPostsResponse> {
+    const [posts, total] = await this.postsRepository
+      .createQueryBuilder('post')
+      .leftJoinAndSelect('post.user', 'user')
+      .select(['post', 'user.id', 'user.username', 'user.displayName'])
+      .orderBy('post.createdAt', 'DESC')
+      .skip(((pagination.page ?? 1) - 1) * (pagination.limit ?? 10))
+      .take(pagination.limit ?? 10)
+      .getManyAndCount();
+
+    return { total, posts };
+  }
+
+  async findByUserIds(
+    userIds: string[],
+    pagination: IPagination,
+  ): Promise<IPostsResponse> {
+    const [posts, total] = await this.postsRepository
+      .createQueryBuilder('post')
+      .leftJoinAndSelect('post.user', 'user')
+      .select(['post', 'user.id', 'user.username', 'user.displayName'])
+      .where('post.userId IN (:...userIds)', { userIds })
+      .orderBy('post.createdAt', 'DESC')
+      .skip(((pagination.page ?? 1) - 1) * (pagination.limit ?? 10))
+      .take(pagination.limit ?? 10)
+      .getManyAndCount();
+
+    return { total, posts };
+  }
 }

@@ -14,4 +14,11 @@ export abstract class PostsRepository {
     userId: string,
     pagination?: IPagination,
   ): Promise<IPostsResponse>;
+
+  abstract findAll(pagination: IPagination): Promise<IPostsResponse>;
+
+  abstract findByUserIds(
+    userIds: string[],
+    pagination: IPagination,
+  ): Promise<IPostsResponse>;
 }

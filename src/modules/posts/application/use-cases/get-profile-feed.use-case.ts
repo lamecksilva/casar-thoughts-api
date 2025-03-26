@@ -1,7 +1,7 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { UsersRepository } from 'src/modules/users/domain/repositories/users.repository';
 import { PostsRepository } from '../../domain/repositories/posts.repository';
-import { GetProfileFeedPaginationDto } from '../dto/feed.dto';
+import { FeedPaginationDto } from '../dto/feed.dto';
 
 @Injectable()
 export class GetProfileFeedUseCase {
@@ -10,7 +10,7 @@ export class GetProfileFeedUseCase {
     private readonly postsRepository: PostsRepository,
   ) {}
 
-  async execute(username: string, pagination: GetProfileFeedPaginationDto) {
+  async execute(username: string, pagination: FeedPaginationDto) {
     Logger.log(`Get profile feed for ${username}`);
 
     const user = await this.usersRepository.findByUsername(username);

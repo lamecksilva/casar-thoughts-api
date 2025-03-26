@@ -27,4 +27,14 @@ export class FollowersTypeORMRepository implements FollowersRepository {
   async unfollowUser(followerId: string, followingId: string): Promise<void> {
     await this.followersRepository.delete({ followerId, followingId });
   }
+
+  async findFollowersIds(userId: string): Promise<string[]> {
+    const following = await this.followersRepository
+      .createQueryBuilder('followers')
+      .select('followers.followingId')
+      .where('followers.followerId = :userId', { userId })
+      .getMany();
+
+    return following.map((f) => f.followingId);
+  }
 }

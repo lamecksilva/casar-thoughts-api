@@ -7,10 +7,16 @@ import { PostsTypeORMRepository } from './domain/repositories/posts_typeorm.repo
 import { PostsService } from './posts.service';
 import { PostsController } from './presentation/controllers/posts.controller';
 import { UsersModule } from '../users/users.module';
+import { GetFeedUseCase } from './application/use-cases/get-feed.use-case';
+import { FollowersModule } from '../followers/followers.module';
 
 @Module({
   controllers: [PostsController],
-  imports: [TypeOrmModule.forFeature([PostEntityTypeORM]), UsersModule],
+  imports: [
+    TypeOrmModule.forFeature([PostEntityTypeORM]),
+    UsersModule,
+    FollowersModule,
+  ],
   providers: [
     PostsTypeORMRepository,
     {
@@ -18,6 +24,7 @@ import { UsersModule } from '../users/users.module';
       useClass: PostsTypeORMRepository,
     },
     GetProfileFeedUseCase,
+    GetFeedUseCase,
     PostsService,
   ],
   exports: [PostsTypeORMRepository],
