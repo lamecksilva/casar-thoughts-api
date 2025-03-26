@@ -10,6 +10,7 @@ import { UsersModule } from '../users/users.module';
 import { GetFeedUseCase } from './application/use-cases/get-feed.use-case';
 import { FollowersModule } from '../followers/followers.module';
 import { CreatePostUseCase } from './application/use-cases/create-post.use-case';
+import { TextProcessingService } from './text-processing.service';
 
 @Module({
   controllers: [PostsController],
@@ -27,6 +28,7 @@ import { CreatePostUseCase } from './application/use-cases/create-post.use-case'
     PostsService,
     GetProfileFeedUseCase,
     GetFeedUseCase,
+    TextProcessingService,
     CreatePostUseCase,
   ],
   exports: [PostsRepository],

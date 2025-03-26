@@ -26,6 +26,8 @@ services:
       DB_PASSWORD: 69t;8:&s<Lp3
       DB_NAME: casar_thoughts
       NODE_ENV: production
+      TEXT_PROCESSING_API_URL: 'http://text-processing.com/api/sentiment'
+      ALLOW_TEXT_PROCESSING: true
     ports:
       - '3000:3000'
     command: ['sh', '-c', 'npm run start:prod']

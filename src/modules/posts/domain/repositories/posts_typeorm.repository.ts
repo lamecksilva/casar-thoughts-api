@@ -8,6 +8,7 @@ import {
   PostsRepository,
 } from './posts.repository';
 import { InjectRepository } from '@nestjs/typeorm';
+import { create } from 'domain';
 
 Injectable();
 export class PostsTypeORMRepository implements PostsRepository {
@@ -106,8 +107,7 @@ export class PostsTypeORMRepository implements PostsRepository {
 
   async create(createPostDto: ICreatePost): Promise<IPost> {
     const post = this.postsRepository.create({
-      text: createPostDto.text,
-      userId: createPostDto.userId,
+      ...createPostDto,
       originalPostId: createPostDto.originalPostId || null,
     });
 

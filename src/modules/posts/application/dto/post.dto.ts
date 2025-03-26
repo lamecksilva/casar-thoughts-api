@@ -2,6 +2,7 @@ import { UserDto } from 'src/modules/users/application/dto/user.dto';
 import { IPost } from '../../domain/entities/post.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDateString, IsOptional, IsString, IsUUID } from 'class-validator';
+import { APP_PIPE } from '@nestjs/core';
 
 export class UserPostDto {
   @ApiProperty({
@@ -60,4 +61,8 @@ export class PostDto implements IPost {
   @ApiProperty({ required: true, example: '2025-03-26' })
   @IsDateString()
   createdAt: Date;
+
+  @ApiProperty({ required: true, example: 'pos' })
+  @IsString()
+  sentiment: string;
 }

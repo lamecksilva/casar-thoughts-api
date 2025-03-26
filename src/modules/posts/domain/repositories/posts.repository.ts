@@ -12,6 +12,7 @@ export interface ICreatePost {
   text: string;
   originalPostId?: string;
   userId: string;
+  sentiment: string;
 }
 
 export abstract class PostsRepository {

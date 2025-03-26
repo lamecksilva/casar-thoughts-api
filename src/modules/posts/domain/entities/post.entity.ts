@@ -19,6 +19,7 @@ export interface IPost {
   originalPostId?: string;
   originalPost?: IPost;
   createdAt: Date;
+  sentiment: string;
 }
 
 @Entity({
@@ -50,4 +51,7 @@ export class PostEntityTypeORM implements IPost {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  sentiment: string;
 }
