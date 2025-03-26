@@ -18,13 +18,15 @@ Endereço padrão: `http://localhost:3000/api`
 
 ### Crítica
 
-> Possíveis Melhorias
+#### Possíveis Melhorias
 
 Melhoraria as Queries, acredito que poderiam ser otimizadas e simplificadas sem precisar de ORM para alguns Selects com joins, por exemplo.
 
 Algumas interfaces (typescript) poderiam ser separadas dos arquivos de entidades do TypeORM, para gerar ainda mais desacoplamento.
 
-> Escalabilidade
+Quanto aos testes, com mais tempo disponível eu faria TDD, para facilitar os testes conforme o desenvolvimento flui e as necessidades de retrabalho, refatoração surgem.
+
+#### Escalabilidade
 
 Acredito que com muitos usuários as primeiras partes a apresentar problemas seriam as de feed e posts. Por estar com alguns relacionamentos que vão exigir mais esforço computacional para buscar os dados.
 
