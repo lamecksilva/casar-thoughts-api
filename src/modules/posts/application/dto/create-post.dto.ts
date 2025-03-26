@@ -1,9 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsUUID } from 'class-validator';
+import { IsString, IsUUID, MaxLength } from 'class-validator';
 
 export class CreatePostDto {
   @ApiProperty({ example: 'Lorem Ipsum', required: true })
   @IsString()
+  @MaxLength(200)
   text: string;
 
   @ApiProperty({
