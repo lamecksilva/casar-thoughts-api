@@ -43,7 +43,7 @@ export class PostEntityTypeORM implements IPost {
 
   @ManyToOne(() => PostEntityTypeORM, {
     nullable: true,
-    lazy: true,
+    eager: true,
   })
   @JoinColumn({ name: 'originalPostId' })
   originalPost?: PostEntityTypeORM;

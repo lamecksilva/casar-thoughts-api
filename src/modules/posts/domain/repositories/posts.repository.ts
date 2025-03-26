@@ -8,6 +8,11 @@ export interface IPostsResponse {
   total: number;
   posts: IPost[];
 }
+export interface ICreatePost {
+  text: string;
+  originalPostId?: string;
+  userId: string;
+}
 
 export abstract class PostsRepository {
   abstract findPostsByUser(
@@ -21,4 +26,6 @@ export abstract class PostsRepository {
     userIds: string[],
     pagination: IPagination,
   ): Promise<IPostsResponse>;
+
+  abstract create(createPostDto: ICreatePost): Promise<IPost>;
 }

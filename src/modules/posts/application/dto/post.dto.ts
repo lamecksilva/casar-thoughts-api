@@ -4,7 +4,20 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsDateString, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class UserPostDto {
+  @ApiProperty({
+    example: '36b8d4d4-b764-4bb5-9c92-5e5835bb1b7c',
+    required: true,
+  })
+  @IsString()
+  @IsUUID()
+  id: string;
+
+  @ApiProperty({ example: 'Walter51', required: true })
+  @IsString()
   name: string;
+
+  @ApiProperty({ example: 'Walter 51 years', required: true })
+  @IsString()
   displayName: string;
 }
 
@@ -29,10 +42,13 @@ export class PostDto implements IPost {
   @IsUUID()
   userId: string;
 
-  @ApiProperty({ required: true })
+  @ApiProperty({ required: true, type: UserPostDto })
   user: UserDto;
 
-  @ApiProperty({ required: false })
+  @ApiProperty({
+    example: '36b8d4d4-b764-4bb5-9c92-5e5835bb1b7c',
+    required: false,
+  })
   @IsOptional()
   @IsString()
   originalPostId?: string;
@@ -41,7 +57,7 @@ export class PostDto implements IPost {
   @IsOptional()
   originalPost?: PostDto;
 
-  @ApiProperty({ required: true, example: '2020' })
+  @ApiProperty({ required: true, example: '2025-03-26' })
   @IsDateString()
   createdAt: Date;
 }

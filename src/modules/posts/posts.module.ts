@@ -9,6 +9,7 @@ import { PostsController } from './presentation/controllers/posts.controller';
 import { UsersModule } from '../users/users.module';
 import { GetFeedUseCase } from './application/use-cases/get-feed.use-case';
 import { FollowersModule } from '../followers/followers.module';
+import { CreatePostUseCase } from './application/use-cases/create-post.use-case';
 
 @Module({
   controllers: [PostsController],
@@ -23,10 +24,11 @@ import { FollowersModule } from '../followers/followers.module';
       provide: PostsRepository,
       useClass: PostsTypeORMRepository,
     },
+    PostsService,
     GetProfileFeedUseCase,
     GetFeedUseCase,
-    PostsService,
+    CreatePostUseCase,
   ],
-  exports: [PostsTypeORMRepository],
+  exports: [PostsRepository],
 })
 export class PostsModule {}

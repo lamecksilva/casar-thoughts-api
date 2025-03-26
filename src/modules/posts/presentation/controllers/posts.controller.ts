@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import {
   FeedResponseDto,
@@ -6,10 +6,22 @@ import {
   FeedParamsDto,
 } from '../../application/dto/feed.dto';
 import { PostsService } from '../../posts.service';
+import { PostDto } from '../../application/dto/post.dto';
+import {
+  CreatePostDto,
+  CreatePostQueryDto,
+} from '../../application/dto/create-post.dto';
 
 @Controller('posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
+
+  @Get('/feed')
+  @ApiOperation({ summary: 'Get feed posts' })
+  @ApiResponse({ status: 200, type: FeedResponseDto })
+  async feed(@Query() feedParams: FeedParamsDto) {
+    return await this.postsService.getFeed(feedParams);
+  }
 
   @Get('user/:username')
   @ApiParam({ name: 'username', example: 'Edison56' })
@@ -22,10 +34,16 @@ export class PostsController {
     return await this.postsService.getProfileFeed(username, pagination);
   }
 
-  @Get('/feed')
-  @ApiOperation({ summary: 'Get feed posts' })
-  @ApiResponse({ status: 200, type: FeedResponseDto })
-  async feed(@Query() feedParams: FeedParamsDto) {
-    return await this.postsService.getFeed(feedParams);
+  @Post('')
+  @ApiOperation({ summary: 'Create post' })
+  @ApiResponse({ status: 201, type: PostDto })
+  async create(
+    @Body() createPostDto: CreatePostDto,
+    @Query() { authenticatedUserId }: CreatePostQueryDto,
+  ) {
+    return await this.postsService.createPost(
+      createPostDto,
+      authenticatedUserId,
+    );
   }
 }

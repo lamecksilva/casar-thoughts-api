@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { PostEntityTypeORM } from '../entities/post.entity';
+import { IPost, PostEntityTypeORM } from '../entities/post.entity';
 import {
+  ICreatePost,
   IPagination,
   IPostsResponse,
   PostsRepository,
@@ -22,12 +23,27 @@ export class PostsTypeORMRepository implements PostsRepository {
     const [posts, total] = await this.postsRepository
       .createQueryBuilder('post')
       .leftJoinAndSelect('post.user', 'user')
-      .select(['post', 'user.id', 'user.username', 'user.displayName'])
+      .leftJoinAndSelect('post.originalPost', 'originalPost')
+      .leftJoinAndSelect('originalPost.user', 'originalPostUser')
+      .select([
+        'post',
+        'user.id',
+        'user.username',
+        'user.displayName',
+        'originalPost.id',
+        'originalPost.text',
+        'originalPost.createdAt',
+        'originalPostUser.id',
+        'originalPostUser.username',
+        'originalPostUser.displayName',
+      ])
       .where('post.userId = :userId', { userId })
       .orderBy('post.createdAt', 'DESC')
       .skip(((pagination.page ?? 1) - 1) * (pagination.limit ?? 10))
       .take(pagination.limit ?? 10)
       .getManyAndCount();
+
+    return { total, posts };
 
     return { total, posts };
   }
@@ -36,7 +52,20 @@ export class PostsTypeORMRepository implements PostsRepository {
     const [posts, total] = await this.postsRepository
       .createQueryBuilder('post')
       .leftJoinAndSelect('post.user', 'user')
-      .select(['post', 'user.id', 'user.username', 'user.displayName'])
+      .leftJoinAndSelect('post.originalPost', 'originalPost')
+      .leftJoinAndSelect('originalPost.user', 'originalPostUser')
+      .select([
+        'post',
+        'user.id',
+        'user.username',
+        'user.displayName',
+        'originalPost.id',
+        'originalPost.text',
+        'originalPost.createdAt',
+        'originalPostUser.id',
+        'originalPostUser.username',
+        'originalPostUser.displayName',
+      ])
       .orderBy('post.createdAt', 'DESC')
       .skip(((pagination.page ?? 1) - 1) * (pagination.limit ?? 10))
       .take(pagination.limit ?? 10)
@@ -52,7 +81,20 @@ export class PostsTypeORMRepository implements PostsRepository {
     const [posts, total] = await this.postsRepository
       .createQueryBuilder('post')
       .leftJoinAndSelect('post.user', 'user')
-      .select(['post', 'user.id', 'user.username', 'user.displayName'])
+      .leftJoinAndSelect('post.originalPost', 'originalPost')
+      .leftJoinAndSelect('originalPost.user', 'originalPostUser')
+      .select([
+        'post',
+        'user.id',
+        'user.username',
+        'user.displayName',
+        'originalPost.id',
+        'originalPost.text',
+        'originalPost.createdAt',
+        'originalPostUser.id',
+        'originalPostUser.username',
+        'originalPostUser.displayName',
+      ])
       .where('post.userId IN (:...userIds)', { userIds })
       .orderBy('post.createdAt', 'DESC')
       .skip(((pagination.page ?? 1) - 1) * (pagination.limit ?? 10))
@@ -60,5 +102,15 @@ export class PostsTypeORMRepository implements PostsRepository {
       .getManyAndCount();
 
     return { total, posts };
+  }
+
+  async create(createPostDto: ICreatePost): Promise<IPost> {
+    const post = this.postsRepository.create({
+      text: createPostDto.text,
+      userId: createPostDto.userId,
+      originalPostId: createPostDto.originalPostId || null,
+    });
+
+    return await this.postsRepository.save(post);
   }
 }
