@@ -15,10 +15,10 @@ export class UsersService {
     private unfollowUserUseCase: UnfollowUserUseCase,
   ) {}
 
-  async getUserProfile(username: string) {
+  async getUserProfile(username: string, loggedUserId?: string) {
     Logger.log('Get user profile');
 
-    return await this.getProfileUseCase.execute(username);
+    return await this.getProfileUseCase.execute(username, loggedUserId);
   }
 
   async followUser(

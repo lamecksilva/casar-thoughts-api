@@ -1,7 +1,7 @@
 import { Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import {
-  FollowUserQueryDto,
+  AuthenticatedUserQueryDto,
   SuccessFollowResponseDto,
 } from '../../application/dto/follow-user.dto';
 import { ProfileDto } from '../../application/dto/profile.dto';
@@ -19,8 +19,14 @@ export class UsersController {
     example: 'Edison56',
     description: 'Username of user',
   })
-  async findOne(@Param('username') username: string) {
-    return await this.usersService.getUserProfile(username);
+  async findOne(
+    @Param('username') username: string,
+    @Query() { authenticatedUserId }: AuthenticatedUserQueryDto,
+  ) {
+    return await this.usersService.getUserProfile(
+      username,
+      authenticatedUserId,
+    );
   }
 
   @Post(':id/follow')
@@ -33,10 +39,9 @@ export class UsersController {
   @ApiResponse({ status: 200, type: SuccessFollowResponseDto })
   async followUser(
     @Param('id') followingId: string,
-    @Query() query: FollowUserQueryDto,
+    @Query() query: AuthenticatedUserQueryDto,
   ) {
     return await this.usersService.followUser({
-      // Como não foi pedido para adicionar autenticação, adicionei esse modo de passar dado de um usuário logado
       followerId: query.authenticatedUserId,
       followingId,
     });
@@ -52,7 +57,7 @@ export class UsersController {
   @ApiResponse({ status: 200, type: SuccessFollowResponseDto })
   async unfollowUser(
     @Param('id') followingId: string,
-    @Query() query: FollowUserQueryDto,
+    @Query() query: AuthenticatedUserQueryDto,
   ) {
     return await this.usersService.unfollowUser({
       followerId: query.authenticatedUserId,

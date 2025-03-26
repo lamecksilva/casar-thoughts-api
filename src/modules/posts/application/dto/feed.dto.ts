@@ -19,7 +19,7 @@ export class FeedPaginationDto {
   @IsNumber()
   page: number;
 
-  @ApiProperty({ required: true, example: 10 })
+  @ApiProperty({ required: true, example: 5 })
   @IsNumber()
   limit: number;
 }

@@ -39,8 +39,8 @@ export class PostsTypeORMRepository implements PostsRepository {
       ])
       .where('post.userId = :userId', { userId })
       .orderBy('post.createdAt', 'DESC')
-      .skip(((pagination.page ?? 1) - 1) * (pagination.limit ?? 10))
-      .take(pagination.limit ?? 10)
+      .skip(((pagination.page ?? 1) - 1) * (pagination.limit ?? 5))
+      .take(pagination.limit ?? 5)
       .getManyAndCount();
 
     return { total, posts };

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsBoolean, IsString, IsUUID } from 'class-validator';
 
-export class FollowUserQueryDto {
+export class AuthenticatedUserQueryDto {
   @ApiProperty({
     example: '0639e277-a293-4e27-bfc2-15d371423c3c',
     required: true,
