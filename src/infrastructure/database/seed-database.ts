@@ -5,6 +5,12 @@ import AppDataSource from './typeorm.config';
 
 const dataSource = AppDataSource;
 
+function getRandomSentiment(): string {
+  const sentiments = ['pos', 'neg', 'neutral'];
+
+  return sentiments[Math.floor(Math.random() * sentiments.length)];
+}
+
 async function seedDatabase() {
   await dataSource.initialize();
   console.log('DB connected');
@@ -30,7 +36,6 @@ async function seedDatabase() {
   await userRepository.save(users);
   console.log('Users created');
 
-  // Criando posts para cada usuário
   const posts: PostEntityTypeORM[] = [];
   for (const user of users) {
     const postCount = faker.number.int({ min: 1, max: 5 }); // Cada usuário tem de 1 a 5 posts
@@ -38,13 +43,14 @@ async function seedDatabase() {
       const post = postRepository.create({
         text: faker.lorem.sentence(),
         user,
+        sentiment: getRandomSentiment(),
       });
       posts.push(post);
     }
   }
 
   await postRepository.save(posts);
-  console.log('Created all posts');
+  console.log('Posts created');
 
   console.log('Seed finished');
   process.exit();

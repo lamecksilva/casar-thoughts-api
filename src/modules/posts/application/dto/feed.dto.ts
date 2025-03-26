@@ -8,6 +8,7 @@ import {
   IsString,
   IsUUID,
 } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export enum FeedType {
   ALL = 'ALL',
@@ -17,10 +18,12 @@ export enum FeedType {
 export class FeedPaginationDto {
   @ApiProperty({ required: true, example: 1 })
   @IsNumber()
+  @Type(() => Number)
   page: number;
 
   @ApiProperty({ required: true, example: 5 })
   @IsNumber()
+  @Type(() => Number)
   limit: number;
 }
 

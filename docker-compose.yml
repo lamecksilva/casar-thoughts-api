@@ -5,8 +5,13 @@ services:
     restart: always
     environment:
       POSTGRES_USER: casaradm
-      POSTGRES_PASSWORD: 69t;8:&s<Lp3
-      POSTGRES_DB: casar-thoughts
+      POSTGRES_PASSWORD: '69t;8:&s<Lp3'
+      POSTGRES_DB: thoughts
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -d postgres']
+      interval: 30s
+      timeout: 10s
+      retries: 5
     ports:
       - '5432:5432'
     volumes:
@@ -19,31 +24,25 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: 'postgres://casaradm:69t;8:&s<Lp3@postgres:5432/casar_thoughts'
+      DATABASE_URL: 'postgres://casaradm:69t;8:&s<Lp3@postgres:5432/thoughts'
       DB_HOST: postgres
       DB_PORT: 5432
       DB_USER: casaradm
-      DB_PASSWORD: 69t;8:&s<Lp3
-      DB_NAME: casar_thoughts
+      DB_PASSWORD: '69t;8:&s<Lp3'
+      DB_NAME: thoughts
       NODE_ENV: production
       TEXT_PROCESSING_API_URL: 'http://text-processing.com/api/sentiment'
       ALLOW_TEXT_PROCESSING: true
     ports:
       - '3000:3000'
-    command: ['sh', '-c', 'npm run start:prod']
+    command: >
+      sh -c "
+      yarn migration:run &&
+      yarn migration:seed && 
+      yarn start:prod"
     volumes:
       - .:/app
       - /app/node_modules
-
-  # migrations:
-  #   build: .
-  #   container_name: nestjs_migrations
-  #   depends_on:
-  #     - postgres
-  #   environment:
-  #     DATABASE_URL: 'postgres://user:password@postgres:5432/mydatabase'
-  #   command: ['sh', '-c', 'npx prisma migrate deploy && npm run seed']
-  #   restart: on-failure
 
 volumes:
   postgres_data:
