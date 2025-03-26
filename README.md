@@ -1,8 +1,8 @@
-### Casar Thoughts
+# Casar Thoughts
 
 Repositório do projeto de teste técnico da Casar.com.
 
-#### Instruções de uso
+## Instruções de uso
 
 Para executar esse projeto, siga os passos:
 
@@ -14,7 +14,7 @@ Para executar esse projeto, siga os passos:
 
 As imagens serão baixadas e a API será acessível na porta 3000.
 
-#### Documentação
+## Documentação
 
 A Documentação da API pode ser acessada por esse arquivo abaixo.
 
@@ -24,7 +24,7 @@ Ao inicializar a aplicação, é possível utilizar o Swagger para testar os End
 
 Endereço padrão: `http://localhost:3000/api`
 
-### DER (Diagrama Entidade Relacionamento)
+## DER (Diagrama Entidade Relacionamento)
 
 ![Image](https://github.com/user-attachments/assets/13d8130e-9683-4e6a-832c-d9619b631403)
 
@@ -56,3 +56,9 @@ Utilizaria escalamento horizontal para criar mais instâncias/containers quando 
 Seria interessante utilizar uma solução de Cache, como o Redis para salvar posts que frequentemente são acessados por grande parte dos usuários (Mas para isso precisaria adicionar monitoramentos, análises de dados para pegar essas métricas e o sistema definir quais seriam ideais a serem cacheados).
 
 Como o banco de dados vai ser muito mais utilizado para leitura, utilizar replicas também seria uma ótima opção para melhorar a disponibilidade e desempenho da aplicação.
+
+### Agradecimentos
+
+Desde já agradeço a oportunidade de realizar este processo seletivo. Desde a entrevista técnica já foi de MUITA valia pelos feedbacks que recebi e vi pontos a serem melhorados, o que me animou e incentivou a estudar mais.
+
+E se possível, gostaria de receber feedbacks sobre esse projeto, onde posso melhorar, pontos do código, arquitetura, boas práticas para ajudar na minha jornada de me tornar um profissional mais qualificado, Muito obrigado!
