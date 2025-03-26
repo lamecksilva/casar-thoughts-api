@@ -22,9 +22,9 @@ O "Thoughts" possui apenas duas páginas, a página inicial e a página de perfi
 - `type` (string, obrigatório): Tipo do feed (exemplo: "FOLLOWING", "ALL").
 - `userId` (string, opcional): ID do usuário para personalização do feed.
 
-> > Quando o `type` for "FOLLOWING", é preciso enviar o campo `userId`
-> >
-> > > O campo `userId` é uma forma de simular um usuário autenticado.
+> Quando o `type` for "FOLLOWING", é preciso enviar o campo `userId`
+>
+> > O campo `userId` é uma forma de simular um usuário autenticado.
 
 **Resposta (200):**
 
@@ -92,7 +92,7 @@ O "Thoughts" possui apenas duas páginas, a página inicial e a página de perfi
 
 - `authenticatedUserId` (string, obrigatório): ID do usuário autenticado.
 
-> > > O campo `authenticatedUserId` é uma forma de simular um usuário autenticado.
+> O campo `authenticatedUserId` é uma forma de simular um usuário autenticado.
 
 **Corpo da requisição:**
 
@@ -145,7 +145,7 @@ modifique a variável de ambiente (docker-compose.yml) `ALLOW_TEXT_PROCESSING` c
 - `username` (string, obrigatório): Nome do usuário.
 - `authenticatedUserId` (string, opcional): ID do usuário autenticado.
 
-> > > O campo `authenticatedUserId` é uma forma de simular um usuário autenticado.
+> O campo `authenticatedUserId` é uma forma de simular um usuário autenticado.
 
 **Resposta (200):**
 
@@ -172,7 +172,7 @@ modifique a variável de ambiente (docker-compose.yml) `ALLOW_TEXT_PROCESSING` c
 - `id` (string, obrigatório): ID do usuário a ser seguido.
 - `authenticatedUserId` (string, obrigatório): ID do seguidor.
 
-> > > O campo `authenticatedUserId` é uma forma de simular um usuário autenticado.
+> O campo `authenticatedUserId` é uma forma de simular um usuário autenticado.
 
 **Resposta (200):**
 
@@ -192,7 +192,7 @@ modifique a variável de ambiente (docker-compose.yml) `ALLOW_TEXT_PROCESSING` c
 - `id` (string, obrigatório): ID do usuário a ser deixado de seguir.
 - `authenticatedUserId` (string, obrigatório): ID do seguidor.
 
-> > > O campo `authenticatedUserId` é uma forma de simular um usuário autenticado.
+> O campo `authenticatedUserId` é uma forma de simular um usuário autenticado.
 
 **Resposta (200):** Mesmo formato da resposta de seguir usuário.
 
