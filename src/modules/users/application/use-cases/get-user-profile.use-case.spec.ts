@@ -59,7 +59,7 @@ describe('GetUserProfileUseCase', () => {
   it('should return user profile when user exists', async () => {
     usersRepository.findByUsername.mockResolvedValue(mockUser);
 
-    const profile = await getUserProfileUseCase.execute('testuser', '456');
+    const profile = await getUserProfileUseCase.execute('test', '456');
 
     expect(profile).toEqual({
       id: '123',
@@ -73,15 +73,15 @@ describe('GetUserProfileUseCase', () => {
     });
   });
 
-  it('should throw NotFoundException when user does not exist', async () => {
+  it('should throw NotFound when user not exist', async () => {
     usersRepository.findByUsername.mockResolvedValue(null);
 
-    await expect(
-      getUserProfileUseCase.execute('nonexistentuser'),
-    ).rejects.toThrow(NotFoundException);
+    await expect(getUserProfileUseCase.execute('fulaninho23')).rejects.toThrow(
+      NotFoundException,
+    );
   });
 
-  it('should return isFollowing as false when loggedId is not following', async () => {
+  it('should return isFollowing false when loggedId user is not following', async () => {
     mockUser.followers = [
       {
         id: '556',
@@ -100,7 +100,7 @@ describe('GetUserProfileUseCase', () => {
     expect(profile.isFollowing).toBe(false);
   });
 
-  it('should return isFollowing as false when loggedId is undefined', async () => {
+  it('should return isFollowing false when not have value loggedId', async () => {
     usersRepository.findByUsername.mockResolvedValue(mockUser);
 
     const profile = await getUserProfileUseCase.execute('test');

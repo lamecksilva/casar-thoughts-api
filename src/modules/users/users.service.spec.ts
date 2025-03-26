@@ -1,18 +1,85 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from './users.service';
+import { SuccessFollowResponseDto } from './application/dto/follow-user.dto';
+import { FollowUserUseCase } from '../followers/application/use-case/follow-user.use-case';
+import { UnfollowUserUseCase } from '../followers/application/use-case/unfollow-user.use-case';
+import { GetUserProfileUseCase } from './application/use-cases/get-user-profile.use-case';
+import { ProfileDto } from './application/dto/profile.dto';
 
 describe('UsersService', () => {
-  let service: UsersService;
+  let usersService: UsersService;
+  let getProfileUseCase: jest.Mocked<GetUserProfileUseCase>;
+  let followUserUseCase: jest.Mocked<FollowUserUseCase>;
+  let unfollowUserUseCase: jest.Mocked<UnfollowUserUseCase>;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [UsersService],
-    }).compile();
+  beforeEach(() => {
+    getProfileUseCase = {
+      execute: jest.fn(),
+    } as unknown as jest.Mocked<GetUserProfileUseCase>;
 
-    service = module.get<UsersService>(UsersService);
+    followUserUseCase = {
+      execute: jest.fn(),
+    } as unknown as jest.Mocked<FollowUserUseCase>;
+
+    unfollowUserUseCase = {
+      execute: jest.fn(),
+    } as unknown as jest.Mocked<UnfollowUserUseCase>;
+
+    usersService = new UsersService(
+      getProfileUseCase,
+      followUserUseCase,
+      unfollowUserUseCase,
+    );
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  it('should get user profile', async () => {
+    const mockProfile: ProfileDto = {
+      id: '123',
+      username: 'fulano',
+      displayName: 'fulano',
+      memberSince: '01/01/2022',
+      followers: 10,
+      following: 5,
+      posts: 3,
+      isFollowing: false,
+    };
+    getProfileUseCase.execute.mockResolvedValue(mockProfile);
+
+    const result = await usersService.getUserProfile('fulano', '456');
+
+    expect(getProfileUseCase.execute).toHaveBeenCalledWith('fulano', '456');
+    expect(result).toEqual(mockProfile);
+  });
+
+  it('should follow a user successfully', async () => {
+    const mockResponse: SuccessFollowResponseDto = {
+      success: true,
+      message: 'User followed successfully',
+    };
+    followUserUseCase.execute.mockResolvedValue(mockResponse);
+
+    const result = await usersService.followUser({
+      followerId: 'user1',
+      followingId: 'user2',
+    });
+
+    expect(followUserUseCase.execute).toHaveBeenCalledWith('user1', 'user2');
+    expect(result).toEqual(mockResponse);
+  });
+
+  it('should unfollow a user successfully', async () => {
+    const mockResponse: SuccessFollowResponseDto = {
+      success: true,
+      message: 'User unfollowed successfully',
+    };
+    unfollowUserUseCase.execute.mockResolvedValue(mockResponse);
+
+    const result = await usersService.unfollowUser({
+      followerId: 'user1',
+      followingId: 'user2',
+    });
+
+    expect(unfollowUserUseCase.execute).toHaveBeenCalledWith('user1', 'user2');
+    expect(result).toEqual(mockResponse);
   });
 });
