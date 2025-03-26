@@ -28,6 +28,7 @@ export class GetUserProfileUseCase {
     return {
       id: user.id,
       username: user.username,
+      displayName: user.displayName,
       memberSince: user.createdAt.toLocaleDateString('pt-BR'),
       followers: user.followers?.length,
       following: user.following?.length,

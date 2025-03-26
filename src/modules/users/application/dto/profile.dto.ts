@@ -11,6 +11,10 @@ export class ProfileDto {
   @IsString()
   username: string;
 
+  @ApiProperty({ example: 'Edison56' })
+  @IsString()
+  displayName: string;
+
   @ApiProperty({ example: '24/02/2025' })
   @IsString()
   memberSince: string;
@@ -29,13 +33,4 @@ export class ProfileDto {
 
   @ApiProperty({ example: false })
   isFollowing: boolean;
-}
-
-class PostDto {
-  id: string;
-  text: string;
-}
-export class FeedDto {
-  posts: PostDto[];
-  count: number;
 }
