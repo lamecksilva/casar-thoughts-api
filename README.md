@@ -13,7 +13,7 @@ Endereço padrão: `http://localhost:3000/api`
 
 ### DER (Diagrama Entidade Relacionamento)
 
-// TODO: Adicionar imagem.
+![Image](https://github.com/user-attachments/assets/13d8130e-9683-4e6a-832c-d9619b631403)
 
 ### Crítica
 
