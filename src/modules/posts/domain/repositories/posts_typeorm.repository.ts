@@ -113,4 +113,15 @@ export class PostsTypeORMRepository implements PostsRepository {
 
     return await this.postsRepository.save(post);
   }
+
+  async countTodayPosts(userId: string): Promise<number> {
+    const { count } = await this.postsRepository
+      .createQueryBuilder('post')
+      .where('post.userId = :userId', { userId })
+      .andWhere('DATE(post.createdAt) = CURRENT_DATE')
+      .select('COUNT(post.id)', 'count')
+      .getRawOne();
+
+    return Number(count) || 0;
+  }
 }

@@ -11,6 +11,11 @@ export class CreatePostUseCase {
     if (!createPostDto.text.length && !createPostDto.originalPostId) {
       throw new BadRequestException('Cannot create an empty post');
     }
+
+    if ((await this.postsRepository.countTodayPosts(userId)) >= 5) {
+      throw new BadRequestException('5 post day limit reached');
+    }
+
     return await this.postsRepository.create({ ...createPostDto, userId });
   }
 }

@@ -28,4 +28,6 @@ export abstract class PostsRepository {
   ): Promise<IPostsResponse>;
 
   abstract create(createPostDto: ICreatePost): Promise<IPost>;
+
+  abstract countTodayPosts(userId: string): Promise<number>;
 }
