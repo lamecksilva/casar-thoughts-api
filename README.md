@@ -9,6 +9,7 @@ A Documentação da API pode ser acessada por esse arquivo abaixo.
 [Documentação da API](DOC.md)
 
 Ao inicializar a aplicação, é possível utilizar o Swagger para testar os Endpoints.
+
 Endereço padrão: `http://localhost:3000/api`
 
 ### DER (Diagrama Entidade Relacionamento)
@@ -20,6 +21,7 @@ Endereço padrão: `http://localhost:3000/api`
 > Possíveis Melhorias
 
 Melhoraria as Queries, acredito que poderiam ser otimizadas e simplificadas sem precisar de ORM para alguns Selects com joins, por exemplo.
+
 Algumas interfaces (typescript) poderiam ser separadas dos arquivos de entidades do TypeORM, para gerar ainda mais desacoplamento.
 
 > Escalabilidade
