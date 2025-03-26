@@ -1,10 +1,9 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { UsersService } from './users.service';
-import { SuccessFollowResponseDto } from './application/dto/follow-user.dto';
 import { FollowUserUseCase } from '../followers/application/use-case/follow-user.use-case';
 import { UnfollowUserUseCase } from '../followers/application/use-case/unfollow-user.use-case';
-import { GetUserProfileUseCase } from './application/use-cases/get-user-profile.use-case';
+import { SuccessFollowResponseDto } from './application/dto/follow-user.dto';
 import { ProfileDto } from './application/dto/profile.dto';
+import { GetUserProfileUseCase } from './application/use-cases/get-user-profile.use-case';
+import { UsersService } from './users.service';
 
 describe('UsersService', () => {
   let usersService: UsersService;
