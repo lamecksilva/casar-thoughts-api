@@ -38,10 +38,9 @@ services:
     command: >
       sh -c "
       yarn migration:run &&
-      yarn migration:seed && 
-      yarn start:prod"
+      yarn migration:seed &&
+      node /app/dist/main"
     volumes:
-      - .:/app
       - /app/node_modules
 
 volumes:

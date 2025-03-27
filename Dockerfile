@@ -5,21 +5,22 @@ WORKDIR /app
 
 COPY package.json yarn.lock ./
 
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 COPY . .
 
-RUN yarn build
+RUN rm -rf dist && yarn build
 
 # Run stage
-FROM node:18 AS runner
+FROM node:20 AS runner
 
 WORKDIR /app
 
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/ ./tsconfig.json
 COPY package.json yarn.lock ./
 
 EXPOSE 3000
 
-CMD ["yarn", "start:prod"]
+CMD ["node", "dist/main"]

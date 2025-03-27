@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class Migration1742937056919 implements MigrationInterface {
-    name = 'Migration1742937056919'
+export class Migration1743077290558 implements MigrationInterface {
+    name = 'Migration1743077290558'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`CREATE TABLE "posts" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "text" character varying(200) NOT NULL, "userId" uuid NOT NULL, "originalPostId" uuid, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_2829ac61eff60fcec60d7274b9e" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "posts" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "text" character varying(200) NOT NULL, "userId" uuid NOT NULL, "originalPostId" uuid, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "sentiment" character varying(20), CONSTRAINT "PK_2829ac61eff60fcec60d7274b9e" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "users" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "username" character varying(14) NOT NULL, "displayName" character varying(30) NOT NULL, CONSTRAINT "UQ_fe0bb3f6520ee0469504521e710" UNIQUE ("username"), CONSTRAINT "CHK_8a93b426076a55f01cb3752bf3" CHECK (username ~ '^[a-zA-Z0-9]+$'), CONSTRAINT "PK_a3ffb1c0c8416b9fc6f907b7433" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "followers" ("followerId" uuid NOT NULL, "followingId" uuid NOT NULL, CONSTRAINT "PK_1485f24f1f66ac91ea2c5517ebd" PRIMARY KEY ("followerId", "followingId"))`);
         await queryRunner.query(`CREATE INDEX "IDX_451bb9eb792c3023a164cf14e0" ON "followers" ("followerId") `);

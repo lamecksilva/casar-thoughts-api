@@ -110,7 +110,7 @@ O "Thoughts" possui apenas duas páginas, a página inicial e a página de perfi
 >
 > > Para criar um post normal, _NÃO_ deve ser enviado o campo `originalPostId`.
 > > Para criar um repost, _DEVE_ ser enviado o campo `originalPostId` com o ID do post original a ser repostado.
-> > Para criar um Repost com comentário, _DEVE_ ser enviado os campos `text` e `originalPostId`.
+> > Para criar um **Repost com comentário**, _DEVE_ ser enviado os campos `text` e `originalPostId`.
 
 #### Text Sentiment API
 
