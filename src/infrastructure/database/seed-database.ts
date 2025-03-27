@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'; // Biblioteca para gerar dados falsos
-import { PostEntityTypeORM } from 'src/modules/posts/domain/entities/post.entity';
-import { UserEntityTypeORM } from 'src/modules/users/domain/entities/user.entity';
+import { PostEntityTypeORM } from 'src/domain/entities/post.entity';
+import { UserEntityTypeORM } from 'src/domain/entities/user.entity';
 import AppDataSource from './typeorm.config';
 
 const dataSource = AppDataSource;

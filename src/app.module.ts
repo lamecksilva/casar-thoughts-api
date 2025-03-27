@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from './modules/users/users.module';
-import { UserEntityTypeORM } from './modules/users/domain/entities/user.entity';
-import { PostEntityTypeORM } from './modules/posts/domain/entities/post.entity';
-import { PostsModule } from './modules/posts/posts.module';
-import { FollowersModule } from './modules/followers/followers.module';
+import { PostEntityTypeORM } from './domain/entities/post.entity';
+import { UserEntityTypeORM } from './domain/entities/user.entity';
+import { FollowersModule } from './presentation/modules/followers.module';
+import { PostsModule } from './presentation/modules/posts.module';
+import { UsersModule } from './presentation/modules/users.module';
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import { FollowersModule } from './modules/followers/followers.module';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      migrations: [__dirname + 'src/infrastructure/database/migrations/*.ts'],
+      migrations: ['dist/**/*-migration.js'],
       entities: [UserEntityTypeORM, PostEntityTypeORM],
       autoLoadEntities: true,
     }),

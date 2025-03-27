@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppModule } from './app.module';
-import { FollowersModule } from './modules/followers/followers.module';
-import { PostsModule } from './modules/posts/posts.module';
-import { UsersModule } from './modules/users/users.module';
+import { FollowersModule } from './presentation/modules/followers.module';
+import { PostsModule } from './presentation/modules/posts.module';
+import { UsersModule } from './presentation/modules/users.module';
 
 describe('AppModule', () => {
   let app: TestingModule;
